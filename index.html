@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FilmFrenzy</title>
+    <style>
+    
+    
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Playwrite+BE+WAL:wght@100..400&family=Signika+Negative:wght@300..700&display=swap');
+
+    
+    
+        body {
+            margin: 0;
+            font-family: "Signika Negative", sans-serif;
+            background-color: #f4f4f4;
+            overflow-x: hidden;
+            scroll-behavior: smooth; /* Smooth scrolling */
+        }
+        
+        
+        
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header .website-name {
+            font-size: 1.5rem;
+        }
+        header .search-bar {
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            outline: none;
+            max-width: 300px;
+            width: 100%;
+            margin: 10px 0; /* Display on a new line */
+        }
+        header .nav-bar {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-top: 10px;
+        }
+        header .nav-bar .dropdown {
+            position: relative;
+        }
+        header .nav-bar .dropdown .dropbtn {
+            background-color: #555;
+            border: none;
+            color: white;
+            padding: 10px;
+            font-size: 16px;
+            font-family: "Signika Negative", sans-serif;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        header .nav-bar .dropdown .dropbtn:hover {
+            background-color: #444;
+        }
+        header .nav-bar .dropdown .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            border-radius: 5px;
+            right: 0;
+            top: 100%;
+            opacity: 0; /* Start as invisible */
+            transform: scaleY(0); /* Start as collapsed */
+            transform-origin: top; /* Anchor scaling from the top */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        header .nav-bar .dropdown .dropdown-content.show {
+            display: block;
+            opacity: 1; /* Fade in */
+            transform: scaleY(1); /* Expand */
+        }
+        header .nav-bar .dropdown .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ddd;
+        }
+        header .nav-bar .dropdown .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .container {
+            padding: 20px;
+        }
+        .movie-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            opacity: 0; /* Start as invisible for animation */
+            transform: translateY(50px); /* Start offset for effect */
+            transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+        }
+        .movie-section.in-view {
+            opacity: 1; /* Fade in */
+            transform: translateY(0); /* Move to position */
+        }
+        .movie-card {
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            width: 100%;
+            max-width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .movie-card img {
+            width: 100%;
+            height: auto;
+        }
+        .movie-card h3 {
+            margin: 10px 0;
+        }
+        .movie-card .buttons {
+            margin: 10px 0;
+        }
+        .movie-card .buttons a {
+            display: inline-block;
+            margin: 0 5px;
+            padding: 10px;
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .movie-card .buttons a:hover {
+            background-color: #0056b3;
+            transform: scale(1.05); /* Slight zoom effect */
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <header>
+     
+        <div class="website-name">FlimFrenzy</div>
+        <input type="text" class="search-bar" placeholder="Search movies...">
+        <div class="nav-bar">
+            <div class="dropdown">
+                <button class="dropbtn" onclick="toggleDropdown()">Categories</button>
+                <div class="dropdown-content">
+                    <a href="#action">Action</a>
+                    <a href="#comedy">Comedy</a>
+                    <a href="#drama">Drama</a>
+                    <a href="#horror">Horror</a>
+                    <a href="#scifi">Sci-Fi</a>
+                    <a href="#romance">Romance</a>
+                    <a href="#thriller">Thriller</a>
+                    <a href="#animation">Animation</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <div id="action" class="movie-section">
+            <h2>Action Movies</h2>
+            <div class="movie-card">
+                <img src="https://i.postimg.cc/pdnxxxS5/MV5-BY2-Qw-OGE2-NGQt-MWQw-Ni00-M2-Iz-LThl-NWIt-YWMz-NGQ5-YWNi-ZDA4-Xk-Ey-Xk-Fqc-Gde-QXVy-NTE1-Nj-Y5-Mg-V1.jpg" alt="Movie Poster 1">
+                <h3>Movie Title 1</h3>
+                <div class="buttons">
+                    <a href="http://example.com/download1" target="_blank">Download</a>
+                    <a href="http://example.com/info1" target="_blank">Click Here</a>
+                </div>
+            </div>
+            <!-- Add more movie cards here -->
+        </div>
+        <div id="comedy" class="movie-section">
+            <h2>Comedy Movies</h2>
+            <div class="movie-card">
+                <img src="https://i.postimg.cc/pdnxxxS5/MV5-BY2-Qw-OGE2-NGQt-MWQw-Ni00-M2-Iz-LThl-NWIt-YWMz-NGQ5-YWNi-ZDA4-Xk-Ey-Xk-Fqc-Gde-QXVy-NTE1-Nj-Y5-Mg-V1.jpg" alt="Movie Poster 2">
+                <h3>Movie Title 2</h3>
+                <div class="buttons">
+                    <a href="http://example.com/download2" target="_blank">Download</a>
+                    <a href="http://example.com/info2" target="_blank">Click Here</a>
+                </div>
+            </div>
+            <!-- Add more movie cards here -->
+        </div>
+        <div id="drama" class="movie-section">
+            <h2>Drama Movies</h2>
+            <div class="movie-card">
+                <img src="https://i.postimg.cc/pdnxxxS5/MV5-BY2-Qw-OGE2-NGQt-MWQw-Ni00-M2-Iz-LThl-NWIt-YWMz-NGQ5-YWNi-ZDA4-Xk-Ey-Xk-Fqc-Gde-QXVy-NTE1-Nj-Y5-Mg-V1.jpg" alt="Movie Poster 3">
+                <h3>Movie Title 3</h3>
+                <div class="buttons">
+                    <a href="http://example.com/download3" target="_blank">Download</a>
+                    <a href="http://example.com/info3" target="_blank">Click Here</a>
+                </div>
+            </div>
+            <!-- Add more movie cards here -->
+        </div>
+        
+   <div id="horror" class="movie-section">
+     <h2>Horror Movies</h2>
+     <div class="movie-card">
+       <img src="https://i.postimg.cc/pdnxxxS5/MV5-BY2-Qw-OGE2-NGQt-MWQw-Ni00-M2-Iz-LThl-NWIt-YWMz-NGQ5-YWNi-ZDA4-Xk-Ey-Xk-Fqc-Gde-QXVy-NTE1-Nj-Y5-Mg-V1.jpg" alt="Movie Poster 3">
+       <h3>Movie Title 3</h3>
+       <div class="buttons">
+         <a href="http://example.com/download3" target="_blank">Download</a>
+         <a href="http://example.com/info3" target="_blank">Click Here</a>
+       </div>
+     </div>
+     <!-- Add more movie cards here -->
+   </div>
+   
+   
+   <div id="scifi" class="movie-section">
+     <h2>SciFi Movies</h2>
+     <div class="movie-card">
+       <img src="https://i.postimg.cc/pdnxxxS5/MV5-BY2-Qw-OGE2-NGQt-MWQw-Ni00-M2-Iz-LThl-NWIt-YWMz-NGQ5-YWNi-ZDA4-Xk-Ey-Xk-Fqc-Gde-QXVy-NTE1-Nj-Y5-Mg-V1.jpg" alt="Movie Poster 3">
+       <h3>Movie Title 3</h3>
+       <div class="buttons">
+         <a href="http://example.com/download3" target="_blank">Download</a>
+         <a href="http://example.com/info3" target="_blank">Click Here</a>
+       </div>
+     </div>
+     <!-- Add more movie cards here -->
+   </div>
+   
+   
+   <div id="romance" class="movie-section">
+     <h2>Romance Movies</h2>
+     <div class="movie-card">
+       <img src="movie-poster3.jpg" alt="Movie Poster 3">
+       <h3>Movie Title 3</h3>
+       <div class="buttons">
+         <a href="http://example.com/download3" target="_blank">Download</a>
+         <a href="http://example.com/info3" target="_blank">Click Here</a>
+       </div>
+     </div>
+     <!-- Add more movie cards here -->
+   </div>
+   
+   
+   
+   <div id="thriller" class="movie-section">
+     <h2>Thriller Movies</h2>
+     <div class="movie-card">
+       <img src="movie-poster3.jpg" alt="Movie Poster 3">
+       <h3>Movie Title 3</h3>
+       <div class="buttons">
+         <a href="http://example.com/download3" target="_blank">Download</a>
+         <a href="http://example.com/info3" target="_blank">Click Here</a>
+       </div>
+     </div>
+     <!-- Add more movie cards here -->
+   </div>
+   
+   
+   
+   <div id="animation" class="movie-section">
+     <h2>Animation Movies</h2>
+     <div class="movie-card">
+       <img src="movie-poster3.jpg" alt="Movie Poster 3">
+       <h3>Movie Title 3</h3>
+       <div class="buttons">
+         <a href="http://example.com/download3" target="_blank">Download</a>
+         <a href="http://example.com/info3" target="_blank">Click Here</a>
+       </div>
+     </div>
+     <!-- Add more movie cards here -->
+   </div>
+        
+        
+        <!-- Add more sections for other categories -->
+    </div>
+    <footer>
+        &copy; 2024 Movie Downloader. All rights reserved.
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const movieSections = document.querySelectorAll('.movie-section');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in-view');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            movieSections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+
+        function toggleDropdown() {
+            const dropdownContent = document.querySelector('.dropdown-content');
+            dropdownContent.classList.toggle('show');
+        }
+    </script>
+</body>
+</html>
